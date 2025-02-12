@@ -1,0 +1,36 @@
+﻿@using AIChatApp.ViewModels
+@using static AIChatApp.Models.ChatMessage
+@code {
+    [Parameter] public ChatViewModel ChatVM { get; set; }
+    private string UserMessage;
+}
+
+<h3>@ChatVM.Title</h3>
+<p><strong>Created By:</strong> @ChatVM.CreatedBy</p>
+<p><strong>Last Modified:</strong> @ChatVM.ModifiedDate</p>
+
+<!-- Model Selection -->
+<ChatModelSettingsView ModelSettingsVM="ChatVM.ModelSettings" />
+
+<!-- Chat Messages -->
+<div class="chat-container">
+    @foreach (var message in ChatVM.ChatHistory)
+    {
+        <ChatMessageView MessageVM="message" />
+    }
+</div>
+
+<!-- Send Message -->
+<input @bind="UserMessage" placeholder="Type a message..." />
+<button @onclick="SendMessage">Send</button>
+
+@code {
+    private void SendMessage()
+    {
+        if (!string.IsNullOrWhiteSpace(UserMessage))
+        {
+            ChatVM.AddMessage(SenderRole.User, UserMessage);
+            UserMessage = string.Empty;
+        }
+    }
+}

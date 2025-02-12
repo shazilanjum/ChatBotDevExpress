@@ -1,0 +1,61 @@
+﻿@using AIChatApp.ViewModels
+@inject NavigationManager Navigation
+@code {
+    [Parameter] public ChatBotViewModel ChatBotVM { get; set; }
+    private string NewChatTitle;
+}
+
+<DxCard>
+    <DxCardHeader>
+        <h2>AI ChatBot</h2>
+    </DxCardHeader>
+
+    <!-- Create New Chat -->
+    <DxCardSection>
+        <DevExpress.Blazor.DxFormLayout>
+            <DevExpress.Blazor.DxFormLayoutItem Caption="New Chat Title">
+                <DevExpress.Blazor.DxTextBox @bind-Value="NewChatTitle" />
+            </DevExpress.Blazor.DxFormLayoutItem>
+            <DevExpress.Blazor.DxFormLayoutItem>
+                <DevExpress.Blazor.DxButton RenderStyle="Primary" Text="Start Chat" Click="StartNewChat" />
+            </DevExpress.Blazor.DxFormLayoutItem>
+        </DevExpress.Blazor.DxFormLayout>
+    </DxCardSection>
+
+    <!-- Chat List -->
+    <DxCardSection>
+        <DxListBox>
+            @foreach (var chat in ChatBotVM.Chats)
+            {
+                <DxListBoxItem>
+                    <DxButton Text="@chat.Title (@chat.CreatedDate.ToShortDateString())"
+                              Click="() => SelectChat(chat)"
+                              RenderStyle="Secondary" />
+                </DxListBoxItem>
+            }
+        </DxListBox>
+    </DxCardSection>
+
+    @if (ChatBotVM.SelectedChat != null)
+    {
+        <DxCardSection>
+            <ChatView ChatVM="ChatBotVM.SelectedChat" />
+        </DxCardSection>
+    }
+</DxCard>
+
+@code {
+    private void StartNewChat()
+    {
+        if (!string.IsNullOrWhiteSpace(NewChatTitle))
+        {
+            ChatBotVM.StartNewChat(NewChatTitle, "User");
+            NewChatTitle = "";
+        }
+    }
+
+    private void SelectChat(ChatViewModel chat)
+    {
+        ChatBotVM.SelectedChat = chat;
+    }
+}
