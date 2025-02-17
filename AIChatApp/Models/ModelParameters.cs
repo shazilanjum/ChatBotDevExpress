@@ -9,10 +9,18 @@ namespace AIChatApp.Models
     public class ModelParameters
     {
         public int MaxTokens { get; set; }
+
         public float Temperature { get; set; }
+
         public float TopP { get; set; }
+
         public int FrequencyPenalty { get; set; }
+
         public int PresencePenalty { get; set; }
+
+
+        public ChatModelSettings ChatModelSettings { get; set; }
+        public int ChatModelSettingsID { get; set; }
 
         public ModelParameters()
         {
@@ -21,11 +29,6 @@ namespace AIChatApp.Models
             TopP = 1.0f;
             FrequencyPenalty = 0;
             PresencePenalty = 0;
-        }
-
-        public string GetParameterSummary()
-        {
-            return $"Max Tokens: {MaxTokens}, Temperature: {Temperature}, Top P: {TopP}, Frequency Penalty: {FrequencyPenalty}, Presence Penalty: {PresencePenalty}";
         }
     }
 

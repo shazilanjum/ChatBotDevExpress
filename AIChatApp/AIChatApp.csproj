@@ -11,11 +11,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="DevExpress.Blazor" Version="24.2.*" />
-    <PackageReference Include="DevExpress.Win.Design" Version="24.2.*" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.2" />
     <PackageReference Include="System.Text.Json" Version="8.0.5" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebView.WindowsForms" Version="8.0.91" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Blazor\" />
   </ItemGroup>
 
 </Project>

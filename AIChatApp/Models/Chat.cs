@@ -9,17 +9,19 @@ namespace AIChatApp.Models
 {
     public class Chat : Metadata
     {
+        public int ID {  get; set; }
+
         public string Title { get; set; }
+
         public ChatModelSettings ModelSettings { get; set; }
+
         public List<ChatMessage> ChatHistory { get; set; }
 
         public Chat(string title, string createdBy)
         {
             Title = title;
-            CreatedBy = createdBy;
             ChatHistory = new List<ChatMessage>();
             CreatedDate = DateTime.UtcNow;
-            ModifiedDate = DateTime.UtcNow;
             ModelSettings = new ChatModelSettings();
         }
 
@@ -27,7 +29,6 @@ namespace AIChatApp.Models
         {
             var chatMessage = new ChatMessage(sender, message);
             ChatHistory.Add(chatMessage);
-            UpdateModifiedDate();
         }
 
         public string GetChatSummary()

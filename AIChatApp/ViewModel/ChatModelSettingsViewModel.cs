@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using AIChatApp.Models;
+using AIChatApp.Models.Enum;
 
 namespace AIChatApp.ViewModels
 {
